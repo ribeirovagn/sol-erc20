@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.16;
 
-import "forge-std/Test.sol";
+import "../lib/forge-std/src/Test.sol";
 import "../src/W3dSoftwareToken.sol";
 
 contract W3dSoftwareTokenTest is Test {
@@ -10,11 +10,11 @@ contract W3dSoftwareTokenTest is Test {
     address vagner = vm.addr(0x2);
 
     function setUp() public {
-        token = new W3dSoftwareToken(1000);
+        token = new W3dSoftwareToken();
     }
 
     function testTokenName() public {
-        assertEq(token.name(), "W3dSoftwareToken");
+        assertEq(token.name(), "W3d Software Token");
     }
 
     function testTokenSymbol() public {
@@ -22,26 +22,26 @@ contract W3dSoftwareTokenTest is Test {
     }
 
     function testTranfer() public {
-        assertTrue(token.transfer(ribeiro, 500));
-        assertEq(token.balanceOf(ribeiro), 500);
-        assertEq(token.balanceOf(address(this)), 500);
+        assertTrue(token.transfer(ribeiro, 5000000));
+        assertEq(token.balanceOf(ribeiro), 5000000);
+        assertEq(token.balanceOf(address(this)), 5000000);
     }
 
     function testAprove() public {
-        assertTrue(token.approve(ribeiro, 500));
+        assertTrue(token.approve(ribeiro, 5000000));
     }
 
     function testAllowance() public {
-        assertTrue(token.approve(ribeiro, 500));
-        assertEq(token.allowance(address(this), ribeiro), 500);
+        assertTrue(token.approve(ribeiro, 5000000));
+        assertEq(token.allowance(address(this), ribeiro), 5000000);
     }
 
     function testTranferFrom() public {
-        assertTrue(token.approve(ribeiro, 500));
-        assertEq(token.allowance(address(this), ribeiro), 500);
+        assertTrue(token.approve(ribeiro, 5000000));
+        assertEq(token.allowance(address(this), ribeiro), 5000000);
         vm.prank(ribeiro);
-        assertTrue(token.transferFrom(address(this), vagner, 500));
-        assertEq(token.balanceOf(vagner), 500);
+        assertTrue(token.transferFrom(address(this), vagner, 5000000));
+        assertEq(token.balanceOf(vagner), 5000000);
         vm.stopPrank();
     }
 }
